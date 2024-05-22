@@ -1,31 +1,23 @@
-#include <iostream>
-#include <cstdlib>
 #include "Base.hpp"
+#include "Identify.hpp"
 
-using std::cout;
-using std::cerr;
-using std::endl;
-
-Base *generate(void);
-void identify(Base *p);
-void identify(Base &p);
-
-int	main(int argc, char **argv)
+int main(void)
 {
-    if (argc > 1 && argv)
-    {
-        cerr << "realtype: error: command-line arguments aren't supported" << endl;
-        return EXIT_FAILURE;
-    }
-    Base *c;
-    
-    cout << "TEST 1" << endl;
-    c = generate();
+    std::srand(std::time(NULL)); // set seed for rand() function
 
-    cout << endl;
-    identify(c);
-    identify(*c);
+    std::cout << std::endl << "Random Base class generated" << std::endl;
+    Base *base = generate();
 
-    delete c;
-    return EXIT_SUCCESS;
+    std::cout << std::endl << YELLOW << "Identifying the type of the Base class using pointers:" << RESET << std::endl;
+    std::cout << "\t" << MAGENTA;
+    identify(base);
+    std::cout << RESET;
+
+    std::cout << std::endl << YELLOW << "Identifying the type of the Base class using references:" << RESET << std::endl;
+    std::cout << "\t" << MAGENTA;
+    identify(*base);
+    std::cout << RESET;
+
+    delete base;
+    return (0);
 }

@@ -6,14 +6,14 @@
 #    By: mvavasso <mvavasso@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/22 01:21:42 by mvavasso          #+#    #+#              #
-#    Updated: 2024/05/22 01:22:18 by mvavasso         ###   ########.fr        #
+#    Updated: 2024/05/22 12:53:10 by mvavasso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= Base
 SRCS	= main.cpp\
  		Base.cpp\
-		functions.cpp
+		Identify.cpp
 OBJS		= $(addprefix objects/, $(notdir $(SRCS:.cpp=.o)))
 FLAGS		= -Wall -Wextra -Werror -g -std=c++98
 CC			= c++
