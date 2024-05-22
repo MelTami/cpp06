@@ -6,7 +6,7 @@
 /*   By: mvavasso <mvavasso@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 01:19:38 by mvavasso          #+#    #+#             */
-/*   Updated: 2024/05/22 01:23:20 by mvavasso         ###   ########.fr       */
+/*   Updated: 2024/05/22 12:45:34 by mvavasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,17 @@
 # define MAGENTA	"\e[35m"
 # define CYAN		"\e[36m"
 
+struct Data;
+
 class Serialization {
-	public:
-		static uintptr_t serialize(data_t *ptr);
-		static data_t *deserialize(uintptr_t raw);
+    private:
+        Serialization(void);
+        ~Serialization(void);
+        Serialization(Serialization const &src);
+        Serialization &operator=(Serialization const &src);
+    public:
+        static uintptr_t serialize(Data *ptr);
+        static Data *deserialize(uintptr_t raw);
 };
 
 #endif
