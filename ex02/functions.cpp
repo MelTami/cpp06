@@ -13,7 +13,7 @@ Base *generate(void)
 	srand(time(NULL));
 	char c = "ABC"[rand() % 3];
 
-	cout << "Type " << c << " created!" << endl;
+	cout << MAGENTA << "Type " << RESET << c << " created!" << endl;
 	switch (c)
 	{
 		case 'A':
@@ -31,7 +31,7 @@ void identify(Base *p)
 	// just to shut "unused-value" compiler warning
 	bool sucessfully_casted;
 
-	cout << "Identify with Base *: ";
+	cout << CYAN << "Identify with Base *: " << RESET ;
 
 	sucessfully_casted = dynamic_cast<A *>(p);
 	if (sucessfully_casted)
@@ -52,12 +52,12 @@ void identify(Base *p)
 		return ;
 	}
 	if (!sucessfully_casted)
-		cout << "Invalid type" << endl;
+		cout << RED << "Invalid type" << RESET << endl;
 }
 
 void identify(Base &p)
 {
-	cout << "Identify with Base &: ";
+	cout << BLUE << "Identify with Base &: " << RESET ;
 	try {
 		A &a = dynamic_cast<A &>(p);
 		(void)a;
@@ -76,7 +76,7 @@ void identify(Base &p)
 				cout << "C" << endl;
 			}
 			catch (const std::exception& e) {
-				cout << "Invalid type" << endl;
+				cout << RED << "Invalid type" << RESET << endl;
 			}
 		}
 	}
