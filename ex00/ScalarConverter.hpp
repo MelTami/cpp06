@@ -13,13 +13,12 @@
 #ifndef SCALARCONVERTER_HPP
 # define SCALARCONVERTER_HPP
 
-# include <iostream>
+# include <limits.h>
+# include <cctype>
 # include <cstdlib>
-# include <cerrno>
-# include <climits>
-# include <limits>
-# include <cfloat>
-# include <string.h>
+# include <iomanip>
+# include <iostream>
+# include <string>
 
 // COLORS
 # define RESET		"\e[m"
@@ -30,49 +29,42 @@
 # define MAGENTA	"\e[35m"
 # define CYAN		"\e[36m"
 
-// ENUMERATORS
-enum e_type {
-    CHAR,
-    INT,
-    FLOAT,
-    DOUBLE
-};
-
-// GLOBAL VARIABLES
-const std::string _pseudo_literals[] = {"nan", "inf"};
+# define PSEUDO  0
+# define CHAR    1
+# define INT     2
+# define FLOAT   3
+# define DOUBLE  4
 
 class ScalarConverter
 {
     private:
-        /* data */
+         static const std::string _pseudoLiterals[6];
+        static std::string _strLiteral;
+        static int _typeLiteral;
+
+        static bool defineType(std::string str);
+        static bool checkInt(std::string str, int &j);
+
+        static void convertChar();
+        static void convertInt();
+        static void convertFloat();
+        static void convertDouble();
+
+        static void printChar(char c);
+        static void printInt(int i);
+        static void printFloat(float f);
+        static void printDouble(double d);
+        static void printPseudo();
+
+        ScalarConverter();
+        ScalarConverter(ScalarConverter const &copy);
+        ~ScalarConverter();
+
+        ScalarConverter &operator=(ScalarConverter const &rhs);
+
     public:
-        ScalarConverter(); //Constructor
-        ScalarConverter(const ScalarConverter &src); // Copy constructor
-        ~ScalarConverter(); //Desctructor
-        ScalarConverter	&operator=(const ScalarConverter &src);
+        static void convert(std::string strLiteral);
 
-        static int getType(const std::string &literal);
-        // Member functions for checking
-        static bool isChar(const std::string &literal);
-        static bool isInt(const std::string &literal);
-        static bool isFloat(const std::string &literal);
-        static bool isDouble(const std::string &literal);
-        // Member functions for converting
-        static void toChar(const std::string &literal);
-        static void toInt(const std::string &literal);
-        static void toFloat(const std::string &literal);
-        static void toDouble(const std::string &literal);
-
-        static void convert(const std::string &literal);
-        // Exceptions
-        class InvalidLiteralException : public std::exception {
-        public:
-            virtual const char *what() const throw();
-        };
-        class NonDisplayableException : public std::exception {
-        public:
-            virtual const char *what() const throw();
-        };
 };
 
 #endif

@@ -6,11 +6,11 @@
 #    By: mvavasso <mvavasso@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/12 01:56:42 by mvavasso          #+#    #+#              #
-#    Updated: 2024/05/21 20:24:27 by mvavasso         ###   ########.fr        #
+#    Updated: 2024/05/21 21:38:40 by mvavasso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= Converter
+NAME	= convert
 SRCS	= main.cpp\
  		ScalarConverter.cpp
 OBJS		= $(addprefix objects/, $(notdir $(SRCS:.cpp=.o)))
