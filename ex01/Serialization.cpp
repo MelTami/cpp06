@@ -1,9 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Serialization.cpp                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mvavasso <mvavasso@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/22 12:29:25 by mvavasso          #+#    #+#             */
+/*   Updated: 2024/05/22 12:46:16 by mvavasso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+
 #include "Serialization.hpp"
 
-uintptr_t Serialization::serialize(data_t *ptr) {
-	return reinterpret_cast<uintptr_t>(ptr);
+Serialization::Serialization() {}
+
+Serialization::Serialization(Serialization const &src) { *this = src; }
+
+Serialization::~Serialization() {}
+
+Serialization &Serialization::operator=(Serialization const &src)
+{
+	if (this != &src)
+	{
+		*this = src;
+		return(*this);
+	}
+    return (*this);
 }
 
-data_t *Serialization::deserialize(uintptr_t raw) {
-	return reinterpret_cast<data_t*>(raw);
+uintptr_t Serialization::serialize(Data *ptr) {
+    uintptr_t raw = reinterpret_cast<uintptr_t>(ptr);
+    return (raw);
+}
+
+Data *Serialization::deserialize(uintptr_t raw) {
+    Data *ptr = reinterpret_cast<Data *>(raw);
+    return (ptr);
 }

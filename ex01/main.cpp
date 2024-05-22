@@ -6,47 +6,32 @@
 /*   By: mvavasso <mvavasso@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 01:19:23 by mvavasso          #+#    #+#             */
-/*   Updated: 2024/05/22 01:26:36 by mvavasso         ###   ########.fr       */
+/*   Updated: 2024/05/22 12:45:47 by mvavasso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <cstdlib>
 #include "Serialization.hpp"
+#include "Data.hpp"
 
-using std::cout;
-using std::cerr;
-using std::endl;
+int main(void) {
+    std::cout << std::endl << YELLOW << "Creating data..." << RESET << std::endl;
+    Data *data = new Data("Hello", "World", 42);
+    std::cout << "Data is in pointer: \t\t" << data << std::endl;
+    std::cout << "Public data is: \t\t" << data->publicData << std::endl;
+    std::cout << "Private data is: \t\t" << data->getPrivateData() << std::endl;
+    std::cout << "Private number is: \t\t" << data->getPrivateNumber() << std::endl;
 
-int	main(int argc, char **argv)
-{
-    if (argc > 1 && argv)
-    {
-        cerr << RED << "serializer: error: command-line arguments aren't supported" << '\n';
-        return EXIT_FAILURE;
-    }
+    std::cout << std::endl << YELLOW << "Serializing..." << RESET << std::endl;
+    uintptr_t raw = Serialization::serialize(data);
+    std::cout << "Raw pointer is: \t\t" << raw << std::endl;
 
-    data_t foo;
-    uintptr_t reinterpreted;
+    std::cout << std::endl << YELLOW << "Deserializing..." << RESET << std::endl;
+    Data *ptr = Serialization::deserialize(raw);
+    std::cout << "Raw is still pointing at: \t" << ptr << std::endl;
+    std::cout << "Public data is: \t\t" << ptr->publicData << std::endl;
+    std::cout << "Private data is: \t\t" << ptr->getPrivateData() << std::endl;
+    std::cout << "Private number is: \t\t" << ptr->getPrivateNumber() << std::endl;
 
-    foo.dummy_str = std::string("test");
-    reinterpreted = Serialization::serialize(&foo);
-
-    cout << CYAN << "OG foo (Data) Address = " << RESET << &foo << endl
-         << BLUE << "dummy_str value = " << RESET << foo.dummy_str << endl;
-
-    cout << endl;
-
-    cout << YELLOW << "Reinterpreted foo value = " << RESET << reinterpreted << endl;
-
-    cout << endl;
-
-    data_t *deserialized;
-
-    deserialized = Serialization::deserialize(reinterpreted);
-
-    cout << GREEN << "Deserialized Address = " << RESET << deserialized << endl
-         << MAGENTA << "dummy_str value = " << RESET << deserialized->dummy_str << endl;
-
-    return EXIT_SUCCESS;
+    delete data;
+    return (0);
 }

@@ -6,13 +6,14 @@
 #    By: mvavasso <mvavasso@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/22 01:18:13 by mvavasso          #+#    #+#              #
-#    Updated: 2024/05/22 01:21:23 by mvavasso         ###   ########.fr        #
+#    Updated: 2024/05/22 12:44:07 by mvavasso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= Serializer
 SRCS	= main.cpp\
- 		Serialization.cpp
+ 		Serialization.cpp\
+		Data.cpp
 OBJS		= $(addprefix objects/, $(notdir $(SRCS:.cpp=.o)))
 FLAGS		= -Wall -Wextra -Werror -g -std=c++98
 CC			= c++
